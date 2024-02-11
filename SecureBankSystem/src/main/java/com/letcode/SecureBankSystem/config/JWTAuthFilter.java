@@ -1,12 +1,14 @@
 package com.letcode.SecureBankSystem.config;
 
-import com.letcode.SecureBankSystem.service.CustomUserDetailsService;
+import com.letcode.SecureBankSystem.service.auth.CustomUserDetailsService;
+import com.letcode.SecureBankSystem.util.excption.UserNotFoundException;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
+
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -17,17 +19,20 @@ import static com.letcode.SecureBankSystem.config.SecurityConfig.AUTH_PATH;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
 @Configuration
-public class JwtAuthFilter extends OncePerRequestFilter {
-        private static final String BEARER = "Bearer ";
+public class JWTAuthFilter extends OncePerRequestFilter {
 
-        private final JWTUtil jwtUtil;
+    private static final String BEARER = "Bearer ";
 
-        private final CustomUserDetailsService userDetailsService;
+    private final JWTUtil jwtUtil;
 
-        public JwtAuthFilter(JWTUtil jwtUtil, CustomUserDetailsService userDetailsService) {
+    private final CustomUserDetailsService userDetailsService;
+
+    public JWTAuthFilter(JWTUtil jwtUtil, CustomUserDetailsService userDetailsService) {
         this.jwtUtil = jwtUtil;
         this.userDetailsService = userDetailsService;
     }
+
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String authorizationHeader = request.getHeader(AUTHORIZATION);
@@ -48,5 +53,3 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         filterChain.doFilter(request,response);
     }
 }
-
-

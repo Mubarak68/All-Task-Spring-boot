@@ -1,19 +1,15 @@
-package com.letcode.SecureBankSystem.bo.auth;
+package com.letcode.SecureBankSystem.bo.customeUserDetails;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 
-public class CustomeUserDetails implements UserDetails {
+import java.util.*;
+
+public class CustomUserDetails implements UserDetails {
 
     private Long id;
-
     private String userName;
-
     private String password;
 
     private String role;
@@ -84,7 +80,7 @@ public class CustomeUserDetails implements UserDetails {
     public Map<String, Object> getClaims(){
         HashMap<String, Object> claims = new HashMap<>();
 
-        claims.put("id", this.id);
+        claims.put("id",this.id);
         claims.put("userName", this.userName);
         claims.put("role", role);
 

@@ -1,18 +1,8 @@
 package com.letcode.SecureBankSystem.bo.user;
 
-public class UpdateUserRequest {
-    private Long userId;
+public class UpdateUserStatusRequest {
 
     private String status;
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
 
     public String getStatus() {
         return status;
@@ -22,5 +12,3 @@ public class UpdateUserRequest {
         this.status = status;
     }
 }
-
-

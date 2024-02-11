@@ -1,10 +1,11 @@
 package com.letcode.SecureBankSystem.config;
 
-import com.letcode.SecureBankSystem.bo.auth.CustomeUserDetails;
+import com.letcode.SecureBankSystem.bo.customeUserDetails.CustomUserDetails;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.stereotype.Component;
+
 import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -14,7 +15,8 @@ import java.util.function.Function;
 public class JWTUtil {
 
     private final String jwtSignKey = "secret";
-    public String generateToken(CustomeUserDetails userDetails){
+
+    public String generateToken(CustomUserDetails userDetails) {
         return doGenerateToken(userDetails.getClaims(), userDetails.getUsername());
     }
 
@@ -22,18 +24,20 @@ public class JWTUtil {
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(subject)
-                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setIssuedAt(new Date(System.currentTimeMillis())) /* this line mean when the token is created this will help us when we want to calculate the
+                 * expiration date for the token so we can know if the token valid or not
+                 */
                 .setExpiration(new Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(24)))
                 .signWith(SignatureAlgorithm.HS256, jwtSignKey).compact();
     }
 
-    private Claims getAllClaimsFromToken(String token) {
-        return Jwts.parser().setSigningKey(jwtSignKey).parseClaimsJws(token).getBody();
+    public <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
+        final Claims claims = getAllClaimsFromToken(token);
+        return claimsResolver.apply(claims);
     }
 
-    public <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver){
-        final Claims claims= getAllClaimsFromToken(token);
-        return claimsResolver.apply(claims);
+    private Claims getAllClaimsFromToken(String token) {
+        return Jwts.parser().setSigningKey(jwtSignKey).parseClaimsJws(token).getBody();
     }
 
 
@@ -54,7 +58,8 @@ public class JWTUtil {
         }
     }
 
-    public String getUsernameFromToken(String token){
-        return getClaimFromToken(token, Claims :: getSubject);
+    public String getUsernameFromToken(String token) {
+        return getClaimFromToken(token, Claims::getSubject);
     }
 }
+

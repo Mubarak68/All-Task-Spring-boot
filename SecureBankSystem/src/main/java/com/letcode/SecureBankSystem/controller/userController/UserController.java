@@ -1,45 +1,39 @@
-package com.letcode.SecureBankSystem.controller.userController;
+package com.letcode.SecureBankSystem.controller.UserController;
 
-import com.letcode.SecureBankSystem.bo.user.UpdateUserRequest;
-import com.letcode.SecureBankSystem.entity.UserEntity;
-import com.letcode.SecureBankSystem.service.UserService;
 import com.letcode.SecureBankSystem.bo.user.CreateUserRequest;
+import com.letcode.SecureBankSystem.bo.user.UpdateUserStatusRequest;
+import com.letcode.SecureBankSystem.service.user.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 public class UserController {
+
     private final UserService userService;
 
-    public UserController(UserService userService){
-
+    public UserController(UserService userService) {
         this.userService = userService;
     }
-    @PostMapping("/create_user")
+
+    @PostMapping("/create-user")
     public ResponseEntity<String> createUser(@RequestBody CreateUserRequest createUserRequest){
         try {
-        userService.saveUser(createUserRequest);
+            userService.saveUser(createUserRequest);
         }catch (IllegalArgumentException e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }
-        return ResponseEntity.ok("User has been Created");
+
+        return ResponseEntity.ok("User Created successfully");
     }
 
-    @PutMapping("/update_user_status")
-    public ResponseEntity<String> updateUser(@RequestParam Long userId,@RequestBody UpdateUserRequest updateUserRequest) {
-        try {
-            userService.updateUserStatus(userId ,updateUserRequest);
-        } catch (IllegalArgumentException e) {
-
+    @PutMapping("/update-user-status")
+    public ResponseEntity<String> updateUser(@RequestParam Long userId, @RequestBody UpdateUserStatusRequest updateUserStatusRequest){
+        try{
+            userService.updateUserStatus(userId, updateUserStatusRequest);
+        }catch (IllegalArgumentException e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }
         return ResponseEntity.ok("User Updated successfully");
-    }
 
-    @GetMapping("/users-list")
-    public List<UserEntity> getAllUsers(){
-       return userService.getAllUsers();
     }
 }
