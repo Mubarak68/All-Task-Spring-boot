@@ -1,5 +1,3 @@
-package com.letcode.SecureBankSystem.config;
-
 import com.letcode.SecureBankSystem.service.auth.CustomUserDetailsService;
 import com.letcode.SecureBankSystem.util.excption.UserNotFoundException;
 import org.springframework.context.annotation.Configuration;

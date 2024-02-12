@@ -62,4 +62,3 @@ public class JWTUtil {
         return getClaimFromToken(token, Claims::getSubject);
     }
 }
-
