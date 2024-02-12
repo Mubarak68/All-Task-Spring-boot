@@ -24,9 +24,7 @@ public class JWTUtil {
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(subject)
-                .setIssuedAt(new Date(System.currentTimeMillis())) /* this line mean when the token is created this will help us when we want to calculate the
-                 * expiration date for the token so we can know if the token valid or not
-                 */
+                .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(24)))
                 .signWith(SignatureAlgorithm.HS256, jwtSignKey).compact();
     }
