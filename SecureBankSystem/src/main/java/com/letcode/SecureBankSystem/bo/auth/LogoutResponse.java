@@ -1,7 +1,6 @@
 package com.letcode.SecureBankSystem.bo.auth;
 
 public class LogoutResponse {
-
     private String token;
 
     public String getToken() {

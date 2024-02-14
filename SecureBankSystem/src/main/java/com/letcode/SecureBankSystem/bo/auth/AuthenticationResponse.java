@@ -1,20 +1,14 @@
 package com.letcode.SecureBankSystem.bo.auth;
 
 public class AuthenticationResponse {
+    private long id;
+    private String username, role, token;
 
-    private Long id;
-
-    private String username;
-
-    private String role;
-
-    private String token;
-
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

@@ -1,10 +1,7 @@
 package com.letcode.SecureBankSystem.bo.auth;
 
 public class CreateLoginRequest {
-
-    private String username;
-
-    private String password;
+    private String username, password;
 
     public String getUsername() {
         return username;
