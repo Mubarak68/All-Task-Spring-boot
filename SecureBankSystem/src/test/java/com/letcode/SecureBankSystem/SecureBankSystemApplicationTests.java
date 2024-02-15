@@ -1,11 +1,11 @@
 package com.letcode.SecureBankSystem;
 
+import com.letcode.SecureBankSystem.entities.GuestEntity;
 import com.letcode.SecureBankSystem.entities.UserEntity;
-import com.letcode.SecureBankSystem.entity.UserEntity;
 import com.letcode.SecureBankSystem.repositories.UserRepository;
-import com.letcode.SecureBankSystem.ropsitory.UserRepository;
-import com.letcode.SecureBankSystem.service.user.UserService;
 import com.letcode.SecureBankSystem.services.user.UserService;
+import com.letcode.SecureBankSystem.utils.enums.SuggestionStatus;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,5 +45,11 @@ class SecureBankSystemApplicationTests {
 
 		assertEquals(Arrays.asList("Mubarak", "Nawaf"), userService.getAllUsersWithStrongPassword());
 	}
+	@Test
+	public void whenGetCreateStatusSuggestions_thenSuccess(){
+		List<GuestEntity> suggestions = Arrays.asList(new GuestEntity("text", 5, SuggestionStatus.CREATE), new GuestEntity("text", 5, SuggestionStatus.CREATE), );
+		Mockito.when(guestRepository.findAllCreatedSuggestions()).thenReturn();
 
+		Assertions.assertEquals(Arrays.asList(new GuestEntity("text", 5, SuggestionStatus.CREATE), new GuestEntity("text", 5, SuggestionStatus.CREATE)), guestRepository.findAllCreatedSuggestions());
+	}
 }

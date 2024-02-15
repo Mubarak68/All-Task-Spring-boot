@@ -19,19 +19,14 @@ public class SuggestionController {
 
     @PostMapping("/create-suggestion")
     public ResponseEntity<Void> processSuggestion(@RequestBody CreateSuggestionRequest createSuggestionRequest){
-        suggestionsService.processSuggestion(createSuggestionRequest);
+        suggestionsService.createSuggestion(createSuggestionRequest);
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/get-create")
-    public ResponseEntity<List<GuestEntity>> findCreateSuggestions(){
-        List<GuestEntity> suggestions = suggestionsService.findAllCreatedSuggestions();
+    @GetMapping("/suggestions")
+    public ResponseEntity<List<GuestEntity>> getSuggestions(@RequestParam String status){
+        List<GuestEntity> suggestions = suggestionsService.findSuggestions(status.toUpperCase());
         return ResponseEntity.ok().body(suggestions);
     }
 
-    @GetMapping("/get-remove")
-    public ResponseEntity<List<GuestEntity>> findRemoveSuggestions(){
-        List<GuestEntity> suggestions = suggestionsService.findAllRemovedSuggestions();
-        return ResponseEntity.ok().body(suggestions);
-    }
 }

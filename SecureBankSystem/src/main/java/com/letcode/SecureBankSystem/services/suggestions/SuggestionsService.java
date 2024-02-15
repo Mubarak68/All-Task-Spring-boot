@@ -6,9 +6,8 @@ import com.letcode.SecureBankSystem.entities.GuestEntity;
 import java.util.List;
 
 public interface SuggestionsService {
-    void processSuggestion(CreateSuggestionRequest createSuggestionRequest);
+    void createSuggestion(CreateSuggestionRequest createSuggestionRequest);
 
-    List<GuestEntity> findAllCreatedSuggestions();
+    List<GuestEntity> findSuggestions(String status);
 
-    List<GuestEntity> findAllRemovedSuggestions();
 }
