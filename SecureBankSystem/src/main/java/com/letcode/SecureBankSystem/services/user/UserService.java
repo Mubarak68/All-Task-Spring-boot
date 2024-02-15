@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface UserService {
     void saveUser(CreateUserRequest createUserRequest);
-    void updateUserStatus(UpdateUserRequest updateUserRequest);
+    void updateUserStatus(UpdateUserRequest updateUserRequest, Long userId);
     List<UserEntity> searchUsers(String status);
 
     List<String> getAllUsersWithStrongPassword();

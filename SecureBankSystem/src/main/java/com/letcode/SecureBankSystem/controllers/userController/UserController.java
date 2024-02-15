@@ -29,12 +29,9 @@ public class UserController {
     }
 
     @PutMapping("/updateStatus")
-    public ResponseEntity<String> updateStatus(@RequestParam long userId, @RequestParam String status) {
-        UpdateUserRequest updateUserRequest = new UpdateUserRequest();
-        updateUserRequest.setUserId(userId);
-        updateUserRequest.setStatus(status);
+    public ResponseEntity<String> updateStatus(@RequestParam long userId, @RequestBody UpdateUserRequest updateUserRequest) {
         try {
-            userService.updateUserStatus(updateUserRequest);
+            userService.updateUserStatus(updateUserRequest,userId);
             return ResponseEntity.ok().body("status updated");
         } catch (IllegalArgumentException e){
             return ResponseEntity.badRequest().body(e.getMessage());
