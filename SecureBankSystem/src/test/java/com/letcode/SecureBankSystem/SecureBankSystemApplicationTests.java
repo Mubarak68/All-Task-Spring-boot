@@ -39,11 +39,11 @@ class SecureBankSystemApplicationTests {
 	public void passLargerThanEight(){
 		UserEntity user1 = new UserEntity();
 		user1.setName("Mubarak");
-		user1.setPassword("12348ssf847");
+		user1.setPassword("1234847mkoj987");
 
 		UserEntity user2 = new UserEntity();
 		user2.setName("Nawaf");
-		user2.setPassword("1234567dggd89");
+		user2.setPassword("1234567dggd89njjn");
 
 		UserEntity user3 = new UserEntity();
 		user3.setName("Ahmad");

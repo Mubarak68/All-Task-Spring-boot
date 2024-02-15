@@ -1,7 +1,6 @@
 package com.letcode.SecureBankSystem.entities;
 
 import com.letcode.SecureBankSystem.utils.enums.Status;
-
 import javax.persistence.*;
 
 @Entity

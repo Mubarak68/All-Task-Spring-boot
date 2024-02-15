@@ -25,7 +25,6 @@ public class AuthController {
     public ResponseEntity<String> createUser(@RequestBody CreateSignupRequest createSignupRequest){
             authService.signup(createSignupRequest);
             return ResponseEntity.status(HttpStatus.CREATED).body("User Created");
-
     }
 
     @PostMapping("/login")
